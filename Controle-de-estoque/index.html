@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Controle de Estoque de Peças</title>
+	<script>
+		// função para atualizar o saldo de estoque de acordo com o tipo de entrada e quantidade informada
+		function atualizarEstoque(tipo, quantidade, saldo) {
+			if (tipo == 1) {
+				saldo += quantidade; // soma a quantidade ao saldo
+			} else if (tipo == 2 && quantidade <= saldo) {
+				saldo -= quantidade; // subtrai a quantidade do saldo apenas se a quantidade informada for menor ou igual ao saldo atual
+			} else {
+				alert("Saldo insuficiente"); // apresenta mensagem de saldo insuficiente caso a quantidade de saída seja maior que o saldo atual
+			}
+			return saldo; // retorna o saldo atualizado
+		}
+
+		// função para exibir o saldo atualizado
+		function exibirSaldo(saldo) {
+			alert("Saldo atual: " + saldo);
+		}
+
+		// função principal para controlar a entrada de dados
+		function controlarEstoque() {
+			let saldo = parseInt(prompt("Informe o saldo inicial da peça: ")); // solicita o saldo inicial e converte para um número inteiro
+			let continuar = true; // variável para controlar a continuidade da entrada de dados
+			while (continuar) {
+				let tipo = parseInt(prompt("Informe o tipo de entrada (1 para compra e 2 para venda): "));
+				let quantidade = parseInt(prompt("Informe a quantidade de peças: "));
+				saldo = atualizarEstoque(tipo, quantidade, saldo); // atualiza o saldo de acordo com o tipo e a quantidade informada
+				exibirSaldo(saldo); // exibe o saldo atualizado
+				continuar = prompt("Deseja continuar? (s/n)").toLowerCase() == "s"; // verifica se o usuário deseja continuar
+			}
+			alert("Sistema encerrado."); // exibe mensagem de encerramento do sistema
+		}
+	</script>
+</head>
+<body>
+	<button onclick="controlarEstoque()">Controlar Estoque</button> <!-- botão para acionar a função principal -->
+</body>
+</html>
